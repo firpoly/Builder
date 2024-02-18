@@ -1,5 +1,8 @@
 package org.example;
 
+
+import org.example.Person;
+
 public class PersonBuilder {
     public String name;
     public String surname;
@@ -36,6 +39,7 @@ public class PersonBuilder {
         return this;
     }
 
+
     public PersonBuilder setAddress(String address) {
         this.address = address;
         return this;
@@ -45,6 +49,6 @@ public class PersonBuilder {
         if (!this.haveInfo) {
             throw new IllegalStateException("Не хватает обяхательных полей");
         }
-        return new Person(this.name, this.surname);
+        return new Person(this.name, this.surname, this.age);
     }
 }

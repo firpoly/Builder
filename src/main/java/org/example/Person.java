@@ -15,9 +15,16 @@ public class Person {
         this.surname = surname;
     }
 
+    public Person(String name, String surname, int age) {
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+
+    }
+
     public boolean hasAge() {
-        OptionalInt optional = OptionalInt.of(this.age);
-        return optional.isEmpty();
+        OptionalInt optional = getAge();
+        return !optional.isEmpty();
     }
 
     public boolean hasAddress() {
@@ -58,3 +65,5 @@ public class Person {
     }
 
 }
+
+
