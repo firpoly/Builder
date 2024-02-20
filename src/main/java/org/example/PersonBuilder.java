@@ -1,33 +1,34 @@
 package org.example;
 
+import java.util.Optional;
 
-import org.example.Person;
 
 public class PersonBuilder {
     public String name;
     public String surname;
     public int age;
-    public boolean haveInfo;
     public String address;
+    public Optional optinalName, optinalSurname;
 
     public PersonBuilder() {
-        this.haveInfo = false;
-    }
-
-    public PersonBuilder setHaveInfo() {
-        this.haveInfo = true;
-        return this;
+        optinalName = Optional.empty();
+        optinalSurname = Optional.empty();
     }
 
     public PersonBuilder setName(String name) {
         this.name = name;
-        setHaveInfo();
+        optinalName = Optional.of(name);
         return this;
+    }
+
+    public boolean haveInfo() {
+
+        return optinalSurname.isEmpty() && optinalName.isEmpty();
     }
 
     public PersonBuilder setSurname(String surname) {
         this.surname = surname;
-        setHaveInfo();
+        optinalSurname = Optional.of(surname);
         return this;
     }
 
@@ -46,7 +47,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        if (!this.haveInfo) {
+        if (haveInfo()) {
             throw new IllegalStateException("Не хватает обяхательных полей");
         }
         return new Person(this.name, this.surname, this.age);

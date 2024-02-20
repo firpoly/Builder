@@ -24,7 +24,7 @@ public class Person {
 
     public boolean hasAge() {
         OptionalInt optional = getAge();
-        return !optional.isEmpty();
+        return optional.isPresent();
     }
 
     public boolean hasAddress() {
@@ -40,7 +40,12 @@ public class Person {
     }
 
     public OptionalInt getAge() {
-        return OptionalInt.of(this.age);
+        OptionalInt age = OptionalInt.of(this.age);
+        if (age.isPresent() && age.getAsInt() != 0) {
+            return age;
+        } else {
+            return age.empty();
+        }
     }
 
     public String getAddress() {
@@ -56,7 +61,9 @@ public class Person {
     }
 
     public PersonBuilder newChildBuilder() {
-        return new PersonBuilder();
+        var person = new PersonBuilder();
+        person.setSurname(this.getSurname());
+        return person;
     }
 
     @Override

@@ -12,8 +12,6 @@ public class Main {
                 .setName("Антошка")
                 .build();
         System.out.println("У " + mom + " есть сын, " + son);
-        boolean temp = mom.hasAge();
-
         try {
             // Не хватает обяхательных полей
             new PersonBuilder().build();
